@@ -1,0 +1,25 @@
+<script>
+  fetch('/admin/data')
+    .then(res => res.json())
+    .then(users => {
+      const tbody = document.getElementById('userTable');
+      tbody.innerHTML = '';
+
+      users.forEach(u => {
+        const status = new Date(u.out_of_date) > new Date() ? 'Valid' : 'Invalid';
+        const row = `
+          <tr>
+            <td>${u.first_name} ${u.last_name}</td>
+            <td>${u.email}</td>
+            <td>${u.key || '-'}</td>
+            <td>${status}</td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    })
+    .catch(err => console.error('Error fetching data:', err));
+    src="../js/script.js"
+</script>
+
+

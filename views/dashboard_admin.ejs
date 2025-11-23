@@ -1,0 +1,18 @@
+<h2>Admin Dashboard</h2>
+<table border="1">
+  <tr>
+    <th>Username</th>
+    <th>Email</th>
+    <th>API Key</th>
+    <th>Status</th>
+  </tr>
+  <% users.forEach(u => { %>
+  <tr>
+    <td><%= u.first_name + ' ' + u.last_name %></td>
+    <td><%= u.email %></td>
+    <td><%= u.key || '-' %></td>
+    <td><%= u.out_of_date && new Date(u.out_of_date) > new Date() ? 'Valid' : 'Invalid' %></td>
+  </tr>
+  <% }) %>
+</table>
+

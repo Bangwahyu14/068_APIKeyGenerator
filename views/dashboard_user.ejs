@@ -1,0 +1,13 @@
+<h2>Welcome, <%= user.first_name %>!</h2>
+<p>Email: <%= user.email %></p>
+
+<% if (user.key) { %>
+  <p>Your API Key: <%= user.key %></p>
+  <p>Status: <%= new Date(user.out_of_date) > new Date() ? 'Valid' : 'Expired' %></p>
+<% } else { %>
+  <form action="/user/create-api" method="POST">
+    <input type="hidden" name="userId" value="<%= user.id %>">
+    <button type="submit">Create API Key</button>
+  </form>
+<% } %>
+
