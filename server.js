@@ -6,6 +6,7 @@ const port = 3000;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Import routes
@@ -13,15 +14,15 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 
-// Gunakan routes
-app.use('/', authRoutes);
+// ROUTES
+app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/admin', adminRoutes);
 
-// 🔹 Tambahkan route default (ini solusi untuk Cannot GET /)
+// ✔ Halaman utama (Generate API Key)
 app.get('/', (req, res) => {
-  res.redirect('/login'); // atau bisa diganti '/register' kalau mau
+  res.sendFile('index.html', { root: './public/html' });
 });
 
-// Jalankan server
+// Start server
 app.listen(port, () => console.log(`🚀 Server running at http://localhost:${port}`));
